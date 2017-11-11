@@ -6,7 +6,7 @@ An `R` package with a single function: the matrix assignment operator `%<-%`.
 ### Why is this?
 What's simpler:
 
-```r
+```R
 
 M <- matrix(c(1, 0.2, -0.3, 0.4, 0.2, 1, 0.6, -0.4, -0.3, 0.6, 1, 0.4, 0.4,
               -0.4, 0.4, 1),
@@ -16,7 +16,7 @@ M <- matrix(c(1, 0.2, -0.3, 0.4, 0.2, 1, 0.6, -0.4, -0.3, 0.6, 1, 0.4, 0.4,
 ```
 or
 
-```r
+```R
 
 M %<-% "   1,  0.2, -0.3,  0.4
          0.2,    1,  0.6, -0.4
@@ -27,7 +27,7 @@ M %<-% "   1,  0.2, -0.3,  0.4
 I like the second better. Hence `Massign`.
 
 ### How do I install it?
-```r
+```R
 
 devtools::install_github("vankesteren/Massign")
 library(Massign)
