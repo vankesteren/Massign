@@ -1,6 +1,6 @@
 Package: Massign
 Type: Package
-Title: Construct Matrices from Strings
+Title: Simple Matrix Construction in R
 Version: 0.1.0
 Author: Erik-Jan van Kesteren
 Maintainer: Erik-Jan van Kesteren <secret@secret.nl>
@@ -8,7 +8,7 @@ Description: Constructing matrices for quick prototyping can be very annoying in
     R, requiring the user to think about how to fill the matrix with values using 
     the matrix() function. The %<-% operator solves that issue by allowing the user 
     to construct string matrices that look like actual matrices.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1

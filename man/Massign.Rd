@@ -6,9 +6,16 @@
 \alias{\%->\%}
 \title{Construct a matrix from a (formatted) string}
 \usage{
-x \%<-\% textMatrix
+var \%<-\% value
 
-textMatrix \%->\% x
+value \%->\% var
+}
+\arguments{
+\item{var}{the variable to which the matrix will be assigned. Can be an element
+of a list.}
+
+\item{value}{a matrix in character form to be converted to a numeric
+matrix.}
 }
 \description{
 Constructing matrices for quick prototyping can be very annoying in \code{R},
@@ -25,5 +32,5 @@ M \%<-\% "   1,  0.2, -0.3,  0.4
 
 }
 \seealso{
-\code{\link{matrix}}
+\code{\link[base]{matrix}}
 }

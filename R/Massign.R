@@ -6,9 +6,11 @@
 #' operator solves that issue by allowing the user to construct string matrices
 #' that look like actual matrices.
 #'
+#' @param var the variable to which the matrix will be assigned. Can be an element
+#' of a list.
 #'
-#' @usage
-#' x \%<-\% textMatrix
+#' @param value a matrix in character form to be converted to a numeric
+#' matrix.
 #'
 #' @examples
 #' M %<-% "   1,  0.2, -0.3,  0.4
@@ -21,14 +23,14 @@
 #' @seealso \code{\link[base]{matrix}}
 #'
 #' @export
-`%<-%` <- function(var, txt) {
+`%<-%` <- function(var, value) {
   # argument checking
-  if (!is.character(txt)) {
+  if (!is.character(value)) {
     stop("Please enter a proper character matrix. See ?`%<-%`")
   }
 
   # first, remove trailing commas if they exist
-  txt <- gsub("\\,[^0-9]*(?=\\n)", "", txt, perl = TRUE)
+  txt <- gsub("\\,[^0-9]*(?=\\n)", "", value, perl = TRUE)
 
   # then extract the first row
   match1 <- gregexpr("[0-9].*(?=\\n)", txt, perl = TRUE)
@@ -75,18 +77,15 @@
 
 #' @rdname Massign
 #'
-#' @usage
-#' textMatrix \%->\% x
-#'
 #' @export
-`%->%` <- function(txt, var) {
+`%->%` <- function(value, var) {
   # argument checking
-  if (!is.character(txt)) {
+  if (!is.character(value)) {
     stop("Please enter a proper character matrix. See ?`%->%`")
   }
 
   # first, remove trailing commas if they exist
-  txt <- gsub("\\,[^0-9]*(?=\\n)", "", txt, perl = TRUE)
+  txt <- gsub("\\,[^0-9]*(?=\\n)", "", value, perl = TRUE)
 
   # then extract the first row
   match1 <- gregexpr("[0-9].*(?=\\n)", txt, perl = TRUE)
