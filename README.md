@@ -1,19 +1,9 @@
-<style>
- @import url(https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css);
- @import url(https://code.cdn.mozilla.net/fonts/fira.css);
- body {
-   font-family: Fira Sans;
- }
- code {
-   font-family: Fira Code;
- }
-</style>
 # `Massign` - simple matrix construction in R
 
 ### What is this?
 An `R` package with a single function: the matrix assignment operator `%<-%`.
 
-### Why is this? 
+### Why is this?
 What's simpler:
 
 ```r
