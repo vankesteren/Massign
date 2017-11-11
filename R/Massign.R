@@ -42,8 +42,8 @@
   commasFirstRow <- length(gregexpr(",", firstrow, fixed = TRUE)[[1]])
   commasTotal <- length(gregexpr(",", txt, fixed = TRUE)[[1]])
 
-  nr <- commasFirstRow + 1
-  nc <- commasTotal/commasFirstRow
+  nc <- commasFirstRow + 1
+  nr <- commasTotal/commasFirstRow
 
   # generate data argument of matrix function
   d <- gsub("\\n", ",", txt)
@@ -97,8 +97,8 @@
   commasFirstRow <- length(gregexpr(",", firstrow, fixed = TRUE)[[1]])
   commasTotal <- length(gregexpr(",", txt, fixed = TRUE)[[1]])
 
-  nr <- commasFirstRow + 1
-  nc <- commasTotal/commasFirstRow
+  nc <- commasFirstRow + 1
+  nr <- commasTotal/commasFirstRow
 
   # generate data argument of matrix function
   d <- gsub("\\n", ",", txt)

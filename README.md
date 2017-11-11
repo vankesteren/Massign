@@ -1,5 +1,7 @@
 # `Massign` - simple matrix construction in R
 
+[![Build Status](https://travis-ci.org/vankesteren/Massign.svg?branch=master)](https://travis-ci.org/vankesteren/Massign)
+
 ### What is this?
 An `R` package with a single function: the matrix assignment operator `%<-%`.
 
