@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Massign.svg" width="40%"></img>
+  <img src="Massign.svg" width="250px"></img>
   <br>
   <h4 align="center">Simple matrix construction in R</h4>
   <p align="center">
