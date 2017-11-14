@@ -60,9 +60,9 @@ R users may already be used to the other matrix operations like `%*%` and `%^%`
 #' @examples
 # Basic usage
 M %<-% "   1,  0.2, -0.3,  0.4
-        0.2,    1,  0.6, -0.4
-       -0.3,  0.6,    1,  0.4
-        0.4, -0.4,  0.4,    1"
+         0.2,    1,  0.6, -0.4
+        -0.3,  0.6,    1,  0.4
+         0.4, -0.4,  0.4,    1"
 
 # Variables allowed!
 phi <- 1.5
