@@ -3,7 +3,7 @@ Type: Package
 Title: Simple Matrix Construction in R
 Version: 1.0.0
 Author: Erik-Jan van Kesteren
-Maintainer: Erik-Jan van Kesteren <secret@secret.nl>
+Maintainer: Erik-Jan van Kesteren <e.vankesteren1@uu.nl>
 Description: Constructing matrices for quick prototyping can be very annoying in
     R, requiring the user to think about how to fill the matrix with values using 
     the matrix() function. The %<-% operator solves that issue by allowing the user 
