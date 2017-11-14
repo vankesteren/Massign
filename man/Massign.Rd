@@ -15,7 +15,7 @@ value \%->\% var
 of a list.}
 
 \item{value}{a matrix in character form to be converted to a numeric
-matrix.}
+matrix. See examples for valid forms.}
 }
 \description{
 Constructing matrices for quick prototyping can be very annoying in \code{R},
@@ -25,10 +25,30 @@ operator solves that issue by allowing the user to construct string matrices
 that look like actual matrices.
 }
 \examples{
+# Basic usage
 M \%<-\% "   1,  0.2, -0.3,  0.4
          0.2,    1,  0.6, -0.4
         -0.3,  0.6,    1,  0.4
          0.4, -0.4,  0.4,    1"
+M
+
+# Variables allowed!
+phi <- 1.5
+V \%<-\% "1,     1,     1
+        1,   phi, phi^2
+        1, phi^2, phi^4"
+V
+
+# Lower triangular is made symmetric:
+S \%<-\% "   1
+         0.5,   1
+        -0.2, 0.2,   1"
+S
+
+# Complex matrices work too:
+C \%<-\% "  1+2i, 2+1i, 3+4i
+        4+0.5i, 5+2i, 6+4i"
+C
 
 }
 \seealso{

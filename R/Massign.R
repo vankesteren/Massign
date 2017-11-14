@@ -10,13 +10,33 @@
 #' of a list.
 #'
 #' @param value a matrix in character form to be converted to a numeric
-#' matrix.
+#' matrix. See examples for valid forms.
 #'
 #' @examples
+#' # Basic usage
 #' M %<-% "   1,  0.2, -0.3,  0.4
 #'          0.2,    1,  0.6, -0.4
 #'         -0.3,  0.6,    1,  0.4
 #'          0.4, -0.4,  0.4,    1"
+#' M
+#'
+#' # Variables allowed!
+#' phi <- 1.5
+#' V %<-% "1,     1,     1
+#'         1,   phi, phi^2
+#'         1, phi^2, phi^4"
+#' V
+#'
+#' # Lower triangular is made symmetric:
+#' S %<-% "   1
+#'          0.5,   1
+#'         -0.2, 0.2,   1"
+#' S
+#'
+#' # Complex matrices work too:
+#' C %<-% "  1+2i, 2+1i, 3+4i
+#'         4+0.5i, 5+2i, 6+4i"
+#' C
 #'
 #' @name Massign
 #'
@@ -32,45 +52,61 @@
   # first, remove trailing commas if they exist
   txt <- gsub("\\,[^0-9]*(?=\\n)", "", value, perl = TRUE)
 
-  # then extract the first row
-  match1 <- gregexpr("[0-9].*(?=\\n)", txt, perl = TRUE)
-  start <- match1[[1]][1]
-  stop <- start + attr(match1[[1]], which = "match.length")[1] - 1
-  firstrow <- substr(txt, start, stop)
+  # then extract the rows
+  rows <- strsplit(txt, "[\n\\\\]", perl = TRUE)[[1]]
 
   # calculate nrow and ncol using number of commas
-  commasFirstRow <- length(gregexpr(",", firstrow, fixed = TRUE)[[1]])
-  commasTotal <- length(gregexpr(",", txt, fixed = TRUE)[[1]])
+  commas <- sapply(gregexpr(",", rows, fixed = TRUE),
+                   function(x) {
+                     if (x[1] < 0) {
+                       return(0)
+                     } else {
+                       length(x)
+                     }
+                   })
+  commasTotal <- sum(commas)
 
-  nc <- commasFirstRow + 1
-  nr <- commasTotal/commasFirstRow
+  nc <- max(commas) + 1
+  nr <- length(rows)
 
-  # generate data argument of matrix function
-  d <- gsub("\\n", ",", txt)
-  d <- as.numeric(strsplit(d, ",", fixed = TRUE)[[1]])
+  nValues <- commasTotal + nr
 
-  if (length(d) != nr*nc) {
-    stop("(Syntax) number of values not equal to number of cells in matrix.")
+  if (nValues != nr*nc) {
+    isLowerTriangular <- all(commas == seq_along(commas) - 1)
+    isUpperTriangular <- all(commas == rev(seq_along(commas) - 1))
+    if (isLowerTriangular) {
+      # fill the upper triangle
+      for (i in seq_along(rows)) {
+        sRows <- strsplit(rows, ",")
+        rows[[i]] <- paste(sapply(sRows, function(x) x[i]), collapse = ",")
+      }
+    } else if (isUpperTriangular) {
+      stop("Upper triangular matrices not yet supported, use lower triangular.")
+    } else {
+      stop("(Syntax) number of values not equal to number of cells in matrix.")
+    }
   }
 
-  # create matrix
-  mat <- matrix(data = d, byrow = TRUE, nrow = nr, ncol = nc)
+  # create data comma separated values
+  d <- paste(rows, collapse = ",")
 
-  # assign to specified variable. This is pretty hacky but works well, even for
-  # subenvironments and lists etc.
-  # TODO: make less hacky
+  # create matrix expression
+  matExp <- paste0("matrix(data = c(", d, "), byrow = TRUE, nrow = ", nr,
+                   ", ncol = ", nc, ")")
 
-  # first, get the environment in which the function was called
+  # Assign to temporary variable. This system is petty hacky but works well,
+  # even for subenvironments and lists etc.
+  # First, get the environment in which the function was called
   pf <- parent.frame()
 
-  # then, create a variable with a reserved name
-  pf$`__MassignMat__` <- mat
+  # Then, create a variable with a reserved name
+  eval(parse(text = paste0("`__MassignMat__` <-", matExp)), envir = pf)
 
-  # then, simply evaluate the assignment in the pf with the newly created var
+  # Next, simply evaluate the assignment in the pf with the newly created var
   eval(parse(text = paste0(deparse(substitute(var)), " <- `__MassignMat__`")),
        envir = pf)
 
-  # lastly, remove the var.
+  # Lastly, remove the var.
   evalq(rm("__MassignMat__"), envir = pf)
 }
 
@@ -81,51 +117,67 @@
 `%->%` <- function(value, var) {
   # argument checking
   if (!is.character(value)) {
-    stop("Please enter a proper character matrix. See ?`%->%`")
+    stop("Please enter a proper character matrix. See ?`%<-%`")
   }
 
   # first, remove trailing commas if they exist
   txt <- gsub("\\,[^0-9]*(?=\\n)", "", value, perl = TRUE)
 
-  # then extract the first row
-  match1 <- gregexpr("[0-9].*(?=\\n)", txt, perl = TRUE)
-  start <- match1[[1]][1]
-  stop <- start + attr(match1[[1]], which = "match.length")[1] - 1
-  firstrow <- substr(txt, start, stop)
+  # then extract the rows
+  rows <- strsplit(txt, "[\n\\\\]", perl = TRUE)[[1]]
 
   # calculate nrow and ncol using number of commas
-  commasFirstRow <- length(gregexpr(",", firstrow, fixed = TRUE)[[1]])
-  commasTotal <- length(gregexpr(",", txt, fixed = TRUE)[[1]])
+  commas <- sapply(gregexpr(",", rows, fixed = TRUE),
+                   function(x) {
+                     if (x[1] < 0) {
+                       return(0)
+                     } else {
+                       length(x)
+                     }
+                   })
+  commasTotal <- sum(commas)
 
-  nc <- commasFirstRow + 1
-  nr <- commasTotal/commasFirstRow
+  nc <- max(commas) + 1
+  nr <- length(rows)
 
-  # generate data argument of matrix function
-  d <- gsub("\\n", ",", txt)
-  d <- as.numeric(strsplit(d, ",", fixed = TRUE)[[1]])
+  nValues <- commasTotal + nr
 
-  if (length(d) != nr*nc) {
-    stop("(Syntax) number of values not equal to number of cells in matrix.")
+  if (nValues != nr*nc) {
+    isLowerTriangular <- all(commas == seq_along(commas) - 1)
+    isUpperTriangular <- all(commas == rev(seq_along(commas) - 1))
+    if (isLowerTriangular) {
+      # fill the upper triangle
+      for (i in seq_along(rows)) {
+        sRows <- strsplit(rows, ",")
+        rows[[i]] <- paste(sapply(sRows, function(x) x[i]), collapse = ",")
+      }
+    } else if (isUpperTriangular) {
+      stop("Upper triangular matrices not yet supported, use lower triangular.")
+    } else {
+      stop("(Syntax) number of values not equal to number of cells in matrix.")
+    }
   }
 
-  # create matrix
-  mat <- matrix(data = d, byrow = TRUE, nrow = nr, ncol = nc)
+  # create data comma separated values
+  d <- paste(rows, collapse = ",")
 
-  # assign to specified variable. This is pretty hacky but works well, even for
-  # subenvironments and lists etc.
-  # TODO: make less hacky
+  # create matrix expression
+  matExp <- paste0("matrix(data = c(", d, "), byrow = TRUE, nrow = ", nr,
+                   ", ncol = ", nc, ")")
 
-  # first, get the environment in which the function was called
+  # Assign to temporary variable. This system is petty hacky but works well,
+  # even for subenvironments and lists etc.
+  # First, get the environment in which the function was called
   pf <- parent.frame()
 
-  # then, create a variable with a reserved name
-  pf$`__MassignMat__` <- mat
+  # Then, create a variable with a reserved name
+  eval(parse(text = paste0("`__MassignMat__` <-", matExp)), envir = pf)
 
-  # then, simply evaluate the assignment in the pf with the newly created var
+  # Next, simply evaluate the assignment in the pf with the newly created var
   eval(parse(text = paste0(deparse(substitute(var)), " <- `__MassignMat__`")),
        envir = pf)
 
-  # lastly, remove the var.
+  # Lastly, remove the var.
   evalq(rm("__MassignMat__"), envir = pf)
 }
 
