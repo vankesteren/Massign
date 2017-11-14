@@ -50,6 +50,10 @@ C \%<-\% "  1+2i, 2+1i, 3+4i
         4+0.5i, 5+2i, 6+4i"
 C
 
+# And lastly, if you're a fan of LaTeX and one-liners:
+L \%<-\% "1, 2, 3 \\\\ 4, 5, 6 \\\\ 7, 8, 9 \\\\ 10, 11, 12"
+# (although this kind of defeats the WYSIWYG purpose of Massign)
+
 }
 \seealso{
 \code{\link[base]{matrix}}
