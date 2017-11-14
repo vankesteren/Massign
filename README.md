@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/vankesteren/Massign/master/Massign.svg" width="40%"></img>
+  <img src="Massign.svg" width="40%"></img>
   <br>
   <h4 align="center">Simple matrix construction in R</h4>
   <p align="center">
@@ -83,3 +83,6 @@ C %<-% "  1+2i, 2+1i, 3+4i
 #### Who is the target audience?
 Anyone who uses `R` for prototyping with matrices. For example, generating data with `lavaan` can be made easier using `Massign`, or trying out different matrix operations.
 **NB: Massign` is _not_ for programming**. Due to the way the assignment operator `%<-%` currently works, I do not guarantee it to work once environments become a little more difficult. **Use of this package as a dependency is at your own risk :)**
+
+#### How did you make that arrow in the logo?
+That's the font [Fira Code](https://github.com/tonsky/FiraCode), where `<-` is a ligature. Check it out!
