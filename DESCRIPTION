@@ -1,13 +1,13 @@
 Package: Massign
 Type: Package
-Title: Simple Matrix Construction in R
+Title: Simple Matrix Construction
 Version: 1.0.0
 Author: Erik-Jan van Kesteren
 Maintainer: Erik-Jan van Kesteren <e.vankesteren1@uu.nl>
-Description: Constructing matrices for quick prototyping can be very annoying in
-    R, requiring the user to think about how to fill the matrix with values using 
-    the matrix() function. The %<-% operator solves that issue by allowing the user 
-    to construct string matrices that look like actual matrices.
+Description: Constructing matrices for quick prototyping can be a nuisance, 
+    requiring the user to think about how to fill the matrix with values using 
+    the matrix() function. The %<-% operator solves that issue by allowing the 
+    user to construct matrices using code that shows the actual matrices.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

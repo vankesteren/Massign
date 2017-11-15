@@ -3,9 +3,10 @@
   <br>
   <h4 align="center">Simple matrix construction in R</h4>
   <p align="center">
-    <a href="https://travis-ci.org/vankesteren/Massign"><img src="https://travis-ci.org/vankesteren/Massign.svg?branch=master"></a>
-    </a>
+    <a href="https://cran.r-project.org/package=Massign"><img src="http://www.r-pkg.org/badges/version/Massign"></a>
+    <a href="https://travis-ci.org/vankesteren/Massign"><img src="https://travis-ci.org/vankesteren/Massign.svg?branch=master"></a>  
   </p>
+
 </p>
 <br>
 
@@ -39,23 +40,26 @@ I like the second better. Hence `Massign`.
 
 ### How do I install it?
 ```R
-
+# Development version
 devtools::install_github("vankesteren/Massign")
+library(Massign)
+
+# CRAN (release) version
+install.packages("Massign")
 library(Massign)
 ```
 
 ### Can you give a more formal description?
-Constructing matrices for quick prototyping can be very annoying in
-R, requiring the user to think about how to fill the matrix with values using
-the matrix() function. The `%<-%` operator solves that issue by allowing the user
-to construct string matrices that look like actual matrices.
+Constructing matrices for quick prototyping can be a nuisance, 
+requiring the user to think about how to fill the matrix with values using 
+the matrix() function. The %<-% operator solves that issue by allowing the 
+user to construct matrices using code that shows the actual matrices.
 
-### FAQ
-#### Why the choice for `%<-%`?
+### Why the choice for `%<-%`?
 R users may already be used to the other matrix operations like `%*%` and `%^%`
 (from `expm`). I felt this was a logical choice in that context.
 
-#### What else can the package do?
+### What else can the package do?
 ```R
 #' @examples
 # Basic usage
@@ -84,9 +88,9 @@ L %<-% "1, 2, 3 \\ 4, 5, 6 \\ 7, 8, 9 \\ 10, 11, 12"
 # (although this kind of defeats the WYSIWYG purpose of Massign)
 ```
 
-#### Who is the target audience?
+### Who is the target audience?
 Anyone who uses `R` for prototyping with matrices. For example, generating data with `lavaan` can be made easier using `Massign`, or trying out different matrix operations.
 **NB: Massign is _not_ for programming**. Due to the way the assignment operator `%<-%` currently works, I do not guarantee it to work once environments become a little more difficult. **Use of this package as a dependency is at your own risk :)**
 
-#### How did you make that arrow in the logo?
+### How did you make that arrow in the logo?
 That's the font [Fira Code](https://github.com/tonsky/FiraCode), where `<-` is a ligature. Check it out!
