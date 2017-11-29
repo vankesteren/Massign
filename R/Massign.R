@@ -45,6 +45,7 @@
 #' @name Massign
 #'
 #' @seealso \code{\link[base]{matrix}}
+#' @seealso \code{\link[Massign]{`%->*%`}}
 #'
 #' @export
 `%<-%` <- function(var, value) {
@@ -123,6 +124,45 @@
 }
 
 
+
+
+#' Construct a matrix from string and matrix multiply it
+#'
+#' Interpret the character form of a matrix, and multiply it.
+#'
+#' This function can be used quickly perform tests with matrix multiplication by
+#' giving the matrices in character form as interpreted by the \code{\%<-\%}
+#' operator. It also fits well in a pipe-operator syntax.
+#'
+#' @param string a matrix in character form to be converted to a numeric matrix.
+#' @param second_arg either a matrix, or a character to be converted to a matrix
+#'   by the  \code{\%<-\%} operator.
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#'
+#' # Use to quickly test the matrix multiplication of two matrices interpreted from strings.
+#' "1, 2
+#'  3, 4" %->*%
+#'  " 0, 1
+#'    1, 0"
+#'
+#' # Use when the second argument is a matrix.
+#' "1, 2, pi \\ 3, 4, 1 \\ 3, 2, 1" %->*% diag(c(1, 2, 3))
+#'
+#'
+`%->*%` <- function(string, second_arg) {
+  mat %<-% string
+
+  if (is.character(second_arg)) {
+    mat2 %<-% second_arg
+    return(mat %*% mat2)
+  }
+
+  mat %*% second_arg
+}
 
 
 
