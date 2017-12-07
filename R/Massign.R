@@ -145,15 +145,15 @@
 #'
 #' # Use to quickly test the matrix multiplication of two matrices interpreted from strings.
 #' "1, 2
-#'  3, 4" %->*%
+#'  3, 4" %*>%
 #'  " 0, 1
 #'    1, 0"
 #'
 #' # Use when the second argument is a matrix.
-#' "1, 2, pi \\ 3, 4, 1 \\ 3, 2, 1" %->*% diag(c(1, 2, 3))
+#' "1, 2, pi \\ 3, 4, 1 \\ 3, 2, 1" %*>% diag(c(1, 2, 3))
 #'
 #'
-`%->*%` <- function(string, second_arg) {
+`%*>%` <- function(string, second_arg) {
   mat %<-% string
 
   if (is.character(second_arg)) {
