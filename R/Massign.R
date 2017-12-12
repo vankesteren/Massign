@@ -121,7 +121,7 @@
 `%->%` <- function(value, var) {
   eval(parse(text = paste0("`%<-%`(",
                            deparse(substitute(var)),
-                           ",'", val,"')")),
+                           ",'", value,"')")),
        envir = parent.frame())
 }
 
