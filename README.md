@@ -3,8 +3,9 @@
   <br>
   <h4 align="center">Simple matrix construction in R</h4>
   <p align="center">
+    <a href="https://travis-ci.org/vankesteren/Massign"><img src="https://travis-ci.org/vankesteren/Massign.svg?branch=master"></a>
     <a href="https://cran.r-project.org/package=Massign"><img src="http://www.r-pkg.org/badges/version/Massign"></a>
-    <a href="https://travis-ci.org/vankesteren/Massign"><img src="https://travis-ci.org/vankesteren/Massign.svg?branch=master"></a>  
+    <a href="https://cran.r-project.org/package=Massign"><img src="https://cranlogs.r-pkg.org/badges/grand-total/Massign?color=1199aa"></a>
   </p>
 
 </p>
@@ -50,9 +51,9 @@ library(Massign)
 ```
 
 ### Can you give a more formal description?
-Constructing matrices for quick prototyping can be a nuisance, 
-requiring the user to think about how to fill the matrix with values using 
-the matrix() function. The %<-% operator solves that issue by allowing the 
+Constructing matrices for quick prototyping can be a nuisance,
+requiring the user to think about how to fill the matrix with values using
+the matrix() function. The %<-% operator solves that issue by allowing the
 user to construct matrices using code that shows the actual matrices.
 
 ### Why the choice for `%<-%`?
