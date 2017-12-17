@@ -119,6 +119,10 @@
 #'
 #' @export
 `%->%` <- function(value, var) {
+  # init variable
+  eval(parse(text = paste0(deparse(substitute(var)), "<- NULL")),
+       envir = parent.frame())
+  # run %<-% on the value and variable
   eval(parse(text = paste0("`%<-%`(",
                            deparse(substitute(var)),
                            ",'", value,"')")),
