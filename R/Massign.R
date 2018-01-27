@@ -122,11 +122,21 @@
   # init variable
   eval(parse(text = paste0(deparse(substitute(var)), "<- NULL")),
        envir = parent.frame())
+
   # run %<-% on the value and variable
-  eval(parse(text = paste0("`%<-%`(",
-                           deparse(substitute(var)),
-                           ",'", value,"')")),
-       envir = parent.frame())
+  if (is.character(value)) {
+    eval(parse(text = paste0("`%<-%`(",
+                             deparse(substitute(var)),
+                             ",'", value,"')")),
+         envir = parent.frame())
+  } else {
+    eval(parse(text = paste0("`%<-%`(",
+                             deparse(substitute(var)),
+                             ",",
+                             deparse(substitute(value)),
+                             ")")),
+         envir = parent.frame())
+  }
 }
 
 
