@@ -29,7 +29,7 @@
 `%*>%` <- function(matrix1, matrix2) {
   areMats <- sapply(list(matrix1, matrix2), is.matrix)
   areChars <- sapply(list(matrix1, matrix2), is.character)
-
+  m1 <- m2 <- NULL
   if (all(areChars)) {
     m1 %<-% matrix1
     m2 %<-% matrix2
@@ -46,5 +46,4 @@
   } else {
     stop("Use matrices or Massign character matrices!")
   }
-
 }
